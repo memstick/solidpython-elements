@@ -36,8 +36,8 @@ def rounded_plane( width, length, offset):
 
 def rounded_perforated_plane( width, length, offset, radius=3, outer_radius=4, height=4 ):
 
-	length = length + radius + offset
-	width = width + radius + offset
+	length = length + outer_radius + offset
+	width = width + outer_radius + offset
 
 	total_length = length + (2 * offset)
 	bridge = plane( width, total_length, 1 )

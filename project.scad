@@ -7,30 +7,30 @@ difference() {
 				cylinder(r = 5);
 				translate(v = [-5, 0, 0]) {
 					linear_extrude(height = 1) {
-						square(size = [10, 58]);
+						square(size = [10, 59]);
 					}
 				}
-				translate(v = [0, 58, 0]) {
+				translate(v = [0, 59, 0]) {
 					cylinder(r = 5);
 				}
 			}
-			translate(v = [-48, 0, 0]) {
+			translate(v = [-49, 0, 0]) {
 				union() {
 					cylinder(r = 5);
 					translate(v = [-5, 0, 0]) {
 						linear_extrude(height = 1) {
-							square(size = [10, 58]);
+							square(size = [10, 59]);
 						}
 					}
-					translate(v = [0, 58, 0]) {
+					translate(v = [0, 59, 0]) {
 						cylinder(r = 5);
 					}
 				}
 			}
 			translate(v = [0, -5, 0]) {
-				translate(v = [-48, 0, 0]) {
+				translate(v = [-49, 0, 0]) {
 					linear_extrude(height = 1) {
-						square(size = [48, 68]);
+						square(size = [49, 69]);
 					}
 				}
 			}
@@ -38,26 +38,26 @@ difference() {
 		translate(v = [0, 0, 0]) {
 			cylinder(h = 4, r = 4);
 		}
-		translate(v = [0, 58, 0]) {
+		translate(v = [0, 59, 0]) {
 			cylinder(h = 4, r = 4);
 		}
-		translate(v = [-48, 0, 0]) {
+		translate(v = [-49, 0, 0]) {
 			cylinder(h = 4, r = 4);
 		}
-		translate(v = [-48, 58, 0]) {
+		translate(v = [-49, 59, 0]) {
 			cylinder(h = 4, r = 4);
 		}
 	}
 	translate(v = [0, 0, 0]) {
 		cylinder(h = 4, r = 3);
 	}
-	translate(v = [0, 58, 0]) {
+	translate(v = [0, 59, 0]) {
 		cylinder(h = 4, r = 3);
 	}
-	translate(v = [-48, 0, 0]) {
+	translate(v = [-49, 0, 0]) {
 		cylinder(h = 4, r = 3);
 	}
-	translate(v = [-48, 58, 0]) {
+	translate(v = [-49, 59, 0]) {
 		cylinder(h = 4, r = 3);
 	}
 }
@@ -103,8 +103,8 @@ def rounded_plane( width, length, offset):
 
 def rounded_perforated_plane( width, length, offset, radius=3, outer_radius=4, height=4 ):
 
-	length = length + radius + offset
-	width = width + radius + offset
+	length = length + outer_radius + offset
+	width = width + outer_radius + offset
 
 	total_length = length + (2 * offset)
 	bridge = plane( width, total_length, 1 )
