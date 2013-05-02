@@ -34,7 +34,7 @@ def rounded_plane( width, length, offset):
 	return b
 
 
-def rounded_perforated_plane( width, length, offset, radius=3, outer_radius=4, height=4 ):
+def rounded_perforated_plane( width, length, offset, radius=3, outer_radius=4, height=5 ):
 
 	length = length + outer_radius + offset
 	width = width + outer_radius + offset
@@ -77,9 +77,14 @@ def rounded_perforated_plane( width, length, offset, radius=3, outer_radius=4, h
 	
 	
 	return elements + walls - holes
-	
+
+    
+
+
+        
+   
 if __name__ == "__main__":
 	
-	b = rounded_perforated_plane( 40, 50, 5 )
+	b = rounded_perforated_plane( 50, 50, 5 )
 	
 	scad_render_to_file(b, "project.scad")

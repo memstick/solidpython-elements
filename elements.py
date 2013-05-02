@@ -1,51 +1,3 @@
-
-
-union() {
-	translate(v = [0, 0, 0]) {
-		mirror(v = [-1, 0, 0]) {
-			translate(v = [0, 0, 0]) {
-				difference() {
-					union() {
-						difference() {
-							cube(size = [20, 20, 1.0000000000]);
-							translate(v = [10.0000000000, 0, 0]) {
-								cube(size = [20, 20, 1.0000000000]);
-							}
-						}
-						translate(v = [10.0000000000, 10.0000000000, 0]) {
-							cylinder(h = 1.0000000000, r = 10.0000000000);
-						}
-					}
-					translate(v = [10.0000000000, 10.0000000000, 0]) {
-						cylinder(h = 1.0000000000, r = 5);
-					}
-				}
-			}
-		}
-	}
-	translate(v = [0, 0, 0]) {
-		difference() {
-			union() {
-				difference() {
-					cube(size = [20, 20, 1.0000000000]);
-					translate(v = [10.0000000000, 0, 0]) {
-						cube(size = [20, 20, 1.0000000000]);
-					}
-				}
-				translate(v = [10.0000000000, 10.0000000000, 0]) {
-					cylinder(h = 1.0000000000, r = 10.0000000000);
-				}
-			}
-			translate(v = [10.0000000000, 10.0000000000, 0]) {
-				cylinder(h = 1.0000000000, r = 3);
-			}
-		}
-	}
-}
-/***********************************************
-******      SolidPython code:      *************
-************************************************
- 
 from solid import *
 from solid.utils import *
 import doctest
@@ -193,6 +145,10 @@ class PerforatedRoundedPlate( PerforatedPlate ):
                 cylinder( radius, depth )
             )
         )    
+
+
+class PerforatedSection( Element ):
+    def __init__( self ):
         
         
 if __name__ == "__main__":
@@ -214,7 +170,4 @@ if __name__ == "__main__":
     
     scad_render_to_file( e, "project.scad" )
     
-         
- 
-***********************************************/
-                            
+        
