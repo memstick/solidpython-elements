@@ -1,45 +1,54 @@
 
 
-union() {
-	translate(v = [0, 0, 0]) {
-		mirror(v = [-1, 0, 0]) {
-			translate(v = [0, 0, 0]) {
+difference() {
+	difference() {
+		difference() {
+			difference() {
 				difference() {
-					union() {
+					difference() {
 						difference() {
-							cube(size = [20, 20, 1.0000000000]);
-							translate(v = [10.0000000000, 0, 0]) {
-								cube(size = [20, 20, 1.0000000000]);
+							difference() {
+								difference() {
+									difference() {
+										cube(size = [20, 20, 1]);
+										translate(v = [1, 1, 0]) {
+											cylinder(r = [3, 3, 1]);
+										}
+									}
+									translate(v = [3, 3, 0]) {
+										cylinder(r = [3, 3, 1]);
+									}
+								}
+								translate(v = [5, 5, 0]) {
+									cylinder(r = [3, 3, 1]);
+								}
+							}
+							translate(v = [7, 7, 0]) {
+								cylinder(r = [3, 3, 1]);
 							}
 						}
-						translate(v = [10.0000000000, 10.0000000000, 0]) {
-							cylinder(h = 1.0000000000, r = 10.0000000000);
+						translate(v = [9, 9, 0]) {
+							cylinder(r = [3, 3, 1]);
 						}
 					}
-					translate(v = [10.0000000000, 10.0000000000, 0]) {
-						cylinder(h = 1.0000000000, r = 5);
+					translate(v = [11, 11, 0]) {
+						cylinder(r = [3, 3, 1]);
 					}
 				}
+				translate(v = [13, 13, 0]) {
+					cylinder(r = [3, 3, 1]);
+				}
 			}
+			translate(v = [15, 15, 0]) {
+				cylinder(r = [3, 3, 1]);
+			}
+		}
+		translate(v = [17, 17, 0]) {
+			cylinder(r = [3, 3, 1]);
 		}
 	}
-	translate(v = [0, 0, 0]) {
-		difference() {
-			union() {
-				difference() {
-					cube(size = [20, 20, 1.0000000000]);
-					translate(v = [10.0000000000, 0, 0]) {
-						cube(size = [20, 20, 1.0000000000]);
-					}
-				}
-				translate(v = [10.0000000000, 10.0000000000, 0]) {
-					cylinder(h = 1.0000000000, r = 10.0000000000);
-				}
-			}
-			translate(v = [10.0000000000, 10.0000000000, 0]) {
-				cylinder(h = 1.0000000000, r = 3);
-			}
-		}
+	translate(v = [19, 19, 0]) {
+		cylinder(r = [3, 3, 1]);
 	}
 }
 /***********************************************
@@ -51,35 +60,39 @@ from solid.utils import *
 import doctest
 
 class Metric:
-    def half( self, axis=None ):
-        return self.center( axis )
-
     def center( self, axis=None ):
-        """
-        >>> e = Size( 10, 5, 1 )
-        >>> e.center()
-        [5.0, 2.5, 0.5]
+        return self.half( axis )
+    
+    def half( self, axis=None ):
+        """alias of center"""
+        return self.divide( axis, 2 )
         
-        >>> e.center('x')
-        5.0
-        >>> e.center('y')
-        2.5
-        >>> e.center('z')
-        0.5
+    def third( self, axis ):
+        return self.self.divide( axis, 3 )
+
+    def quarter( self, axis ):
+        return self.self.divide( axis, 4 )
+    
+    def divide( self, axis, divisor ):
+        """
+        Returns a centerpoint between n equal parts.
         """
     
-        x, y, z = 'x', 'y', 'z'
+        x = self.x / float(divisor)
+        y = self.y / float(divisor)
+        z = self.z / float(divisor)
+        
         if axis:
-            if axis.lower() == x:
-                return self.x / 2.0
-            elif axis.lower() == y:
-                return self.y / 2.0
-            elif axis.lower() == z:
-                return self.z / 2.0
+            if axis.lower() == 'x':
+                return x
+            elif axis.lower() == 'y':
+                return y
+            elif axis.lower() == 'z':
+                return z
             else:
                 raise Error( 'The requested axis >>> {axis} <<< was not found'.format( axis=axis ) )
         else:
-            return Position( self.x / 2.0, self.y / 2.0, self.z / 2.0 )
+            return Position( x, y, z )
             
 
     def __call__( self, container_type=list ):
@@ -120,9 +133,9 @@ class Size( Metric ):
         self.z = z if z else 1.0
     
     def stretch( self, x=None, y=None, z=None ):
-        self.x = self.x * x if x else self.x
-        self.y = self.y * y if y else self.y
-        self.z = self.z * z if z else self.z
+        self.x = (self.x * x) if x else self.x
+        self.y = (self.y * y) if y else self.y
+        self.z = (self.z * z) if z else self.z
         
 
 class Element:
@@ -149,7 +162,6 @@ class Plate( Element ):
         
 
 class PerforatedPlate( Plate ):
-
     def __init__( self, size, hole_radius=None ):
         Plate.__init__( self, size )
         self.hole_radius = hole_radius if hole_radius else 1.0
@@ -193,24 +205,73 @@ class PerforatedRoundedPlate( PerforatedPlate ):
                 cylinder( radius, depth )
             )
         )    
+
+
+class PerforatedSection( Element ):
+    def __init__( self, length=10, unit=20, hole_radius=5 ):
+        # the length is calculated from the center of 
+        # the center of the opposite hole
+        self.length = length - unit # (lenght - 2 * (unit/2))
+        self.unit = unit
+        self.e1 = PerforatedRoundedPlate( Size( unit, unit, 1 ), hole_radius )
+        self.e2 = PerforatedRoundedPlate( Size( unit, unit, 1 ), hole_radius )
         
+    def create_bridge( self ):
+        return translate([-self.length,0,0]) (
+            cube([self.length, self.unit, 1])
+        )
+    
+    def create( self, position=None ):        
+        bridge = self.create_bridge()
+    
+        ends = union() (
+            translate([-self.length,0,0]) (
+                mirror([-1,0,0]) (self.e1.put())
+            ),
+            self.e2.put(),            
+        )
+        
+        return union() (
+            ends, 
+            bridge
+        )
+    
+
+    
+def grill( x, y, z ):
+    g = cube([x, y, z])
+    
+    v = {}
+    
+    v['x'] = [i for i in range( 1, x, 2 )]
+    v['y'] = [i for i in range( 1, y, 2 )]
+        
+    for x, y in zip( v['x'], v['y'] ):
+        g = difference() (
+            g,
+            translate([x,y,0]) (
+                cylinder([3,3,z])
+            )
+        )
+    
+    return g
+
         
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
 
+    e = PerforatedSection( 100 )
     
-    e1 = PerforatedRoundedPlate( Size( 20, 20, 0 ), 5 )
+    e = e.put()
     
-    e2 = PerforatedRoundedPlate( Size( 20, 20, 0 ), 3 )
+    e = grill( 20, 20, 1 )
     
     
-    e = union() (
-        translate([0,0,0]) (
-            mirror([-1,0,0]) (e1.put())
-        ),
-        e2.put()
-    )
+
+    
+    
+
     
     scad_render_to_file( e, "project.scad" )
     
