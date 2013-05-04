@@ -2,6 +2,8 @@ from solid import *
 from solid.utils import *
 import doctest
 
+from math import sqrt
+
 class Metric:
     def center( self, axis=None ):
         return self.half( axis )
@@ -11,10 +13,10 @@ class Metric:
         return self.divide( axis, 2 )
         
     def third( self, axis ):
-        return self.self.divide( axis, 3 )
+        return self.divide( axis, 3 )
 
     def quarter( self, axis ):
-        return self.self.divide( axis, 4 )
+        return self.divide( axis, 4 )
     
     def divide( self, axis, divisor ):
         """
@@ -74,6 +76,12 @@ class Size( Metric ):
         self.x = x if x else 1.0
         self.y = y if y else 1.0
         self.z = z if z else 1.0
+
+    def diagonal( self, dimensions=2 ):
+        if dimensions == 2:
+            return sqrt( self.x**2 + self.y**2 )
+        else:
+            return sqrt( self.x**2 + self.y**2 + self.z**2 )
     
     def stretch( self, x=None, y=None, z=None ):
         self.x = (self.x * x) if x else self.x
@@ -182,7 +190,50 @@ class PerforatedSection( Element ):
 
     
 class Grill(Element):
-    pass
+    def create_grill( self ):
+
+        holes = []
+
+        # parameterize
+        width = 2
+        step = width * 2
+
+        for i in range( -1, self.size.x * 2, step ):
+            holes.append(
+                translate([i,-2,0]) (
+                    rotate( 45 ) (
+                        cube( [width, self.size.diagonal() * 2,self.size.z] )
+                    )
+                )
+            )
+
+        holes = union() (
+            *holes
+        )
+
+        return holes
+
+    def create( self ):
+        return difference() (
+            cube( self.size() ),
+            self.create_grill()
+        )
+
+
+class Mesh( Grill ):
+    def create( self ):
+        grill_a = Grill( self.size )
+        grill_b = Grill( self.size )
+
+        grill_b = mirror([-1,0,0]) (
+            grill_b.put([-self.size.x, 0, 0])
+        )
+
+        return union() (
+            grill_a.put(),
+            grill_b
+        )
+        
     
 class HoleGrill(Grill):
     
@@ -247,17 +298,9 @@ if __name__ == "__main__":
     doctest.testmod()
 
     e = PerforatedSection( 100 )
-    
-    
-    
-    e = HoleGrill( Size(50, 50, 1) )
-    
-    e = e.put()
 
-    
-    
+    e = Mesh( Size( 20, 20, 1) )
 
-    
-    scad_render_to_file( e, "project.scad" )
+    scad_render_to_file( e.put(), "project.scad" )
     
         
