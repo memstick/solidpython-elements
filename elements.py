@@ -181,24 +181,66 @@ class PerforatedSection( Element ):
     
 
     
-def grill( x, y, z ):
-    g = cube([x, y, z])
+class Grill(Element):
+    pass
     
-    v = {}
+class HoleGrill(Grill):
     
-    v['x'] = [i for i in range( 1, x, 2 )]
-    v['y'] = [i for i in range( 1, y, 2 )]
+    def create_hole( self, radius=1 ):
+        return cylinder( radius, self.size.z )
+    
+    def find_holes( self, step=5 ):
+        result = []
+        odd = False
+    
+        x = self.size.x
+        y = self.size.y
+        z = self.size.z
         
-    for x, y in zip( v['x'], v['y'] ):
+        v = {}
+    
+        v['x'] = [i for i in range( 1, x, step )]
+        v['y'] = [i for i in range( 1, y, step )]
+        
+        for d in range( -x, x+1, 2 ):
+            odd = not odd
+            for x, y in zip( v['x'], v['y'] ):
+                if odd:
+                    result.append( [x+d, y+step, 0] )
+                else:
+                    result.append( [x+d, y, 0] )
+        
+        return result
+                
+                
+        
+        
+    def create( self ):
+    
+        g = cube( self.size() )
+    
+        holes = []
+        
+        for h in self.find_holes():
+            h = translate(h) (
+                self.create_hole()
+            )        
+            holes.append( h )
+
+        holes = union() ( *holes )
+        
         g = difference() (
             g,
-            translate([x,y,0]) (
-                cylinder([3,3,z])
-            )
-        )
-    
-    return g
+            holes
+        )   
+        
+        return g
 
+        
+        
+class LineGrill( Grill ):
+    pass
+    
         
 if __name__ == "__main__":
     import doctest
@@ -206,11 +248,11 @@ if __name__ == "__main__":
 
     e = PerforatedSection( 100 )
     
+    
+    
+    e = HoleGrill( Size(50, 50, 1) )
+    
     e = e.put()
-    
-    e = grill( 20, 20, 1 )
-    
-    
 
     
     
