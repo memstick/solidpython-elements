@@ -1,130 +1,32 @@
 
 
 translate(v = [0, 0, 0]) {
-	union() {
-		translate(v = [0, 0, 0]) {
-			difference() {
-				cube(size = [20, 20, 1]);
-				union() {
-					translate(v = [-1, -2, 0]) {
-						rotate(a = 45) {
-							cube(size = [2, 56.5685424949, 1]);
-						}
-					}
-					translate(v = [3, -2, 0]) {
-						rotate(a = 45) {
-							cube(size = [2, 56.5685424949, 1]);
-						}
-					}
-					translate(v = [7, -2, 0]) {
-						rotate(a = 45) {
-							cube(size = [2, 56.5685424949, 1]);
-						}
-					}
-					translate(v = [11, -2, 0]) {
-						rotate(a = 45) {
-							cube(size = [2, 56.5685424949, 1]);
-						}
-					}
-					translate(v = [15, -2, 0]) {
-						rotate(a = 45) {
-							cube(size = [2, 56.5685424949, 1]);
-						}
-					}
-					translate(v = [19, -2, 0]) {
-						rotate(a = 45) {
-							cube(size = [2, 56.5685424949, 1]);
-						}
-					}
-					translate(v = [23, -2, 0]) {
-						rotate(a = 45) {
-							cube(size = [2, 56.5685424949, 1]);
-						}
-					}
-					translate(v = [27, -2, 0]) {
-						rotate(a = 45) {
-							cube(size = [2, 56.5685424949, 1]);
-						}
-					}
-					translate(v = [31, -2, 0]) {
-						rotate(a = 45) {
-							cube(size = [2, 56.5685424949, 1]);
-						}
-					}
-					translate(v = [35, -2, 0]) {
-						rotate(a = 45) {
-							cube(size = [2, 56.5685424949, 1]);
-						}
-					}
-					translate(v = [39, -2, 0]) {
-						rotate(a = 45) {
-							cube(size = [2, 56.5685424949, 1]);
-						}
-					}
+	difference() {
+		cube(size = [25, 25, 1]);
+		union() {
+			translate(v = [3.5000000000, 3, 0]) {
+				rotate(a = 45) {
+					cylinder(r = 3);
 				}
 			}
-		}
-		mirror(v = [-1, 0, 0]) {
-			translate(v = [-20, 0, 0]) {
-				difference() {
-					cube(size = [20, 20, 1]);
-					union() {
-						translate(v = [-1, -2, 0]) {
-							rotate(a = 45) {
-								cube(size = [2, 56.5685424949, 1]);
-							}
-						}
-						translate(v = [3, -2, 0]) {
-							rotate(a = 45) {
-								cube(size = [2, 56.5685424949, 1]);
-							}
-						}
-						translate(v = [7, -2, 0]) {
-							rotate(a = 45) {
-								cube(size = [2, 56.5685424949, 1]);
-							}
-						}
-						translate(v = [11, -2, 0]) {
-							rotate(a = 45) {
-								cube(size = [2, 56.5685424949, 1]);
-							}
-						}
-						translate(v = [15, -2, 0]) {
-							rotate(a = 45) {
-								cube(size = [2, 56.5685424949, 1]);
-							}
-						}
-						translate(v = [19, -2, 0]) {
-							rotate(a = 45) {
-								cube(size = [2, 56.5685424949, 1]);
-							}
-						}
-						translate(v = [23, -2, 0]) {
-							rotate(a = 45) {
-								cube(size = [2, 56.5685424949, 1]);
-							}
-						}
-						translate(v = [27, -2, 0]) {
-							rotate(a = 45) {
-								cube(size = [2, 56.5685424949, 1]);
-							}
-						}
-						translate(v = [31, -2, 0]) {
-							rotate(a = 45) {
-								cube(size = [2, 56.5685424949, 1]);
-							}
-						}
-						translate(v = [35, -2, 0]) {
-							rotate(a = 45) {
-								cube(size = [2, 56.5685424949, 1]);
-							}
-						}
-						translate(v = [39, -2, 0]) {
-							rotate(a = 45) {
-								cube(size = [2, 56.5685424949, 1]);
-							}
-						}
-					}
+			translate(v = [3.5000000000, 9, 0]) {
+				rotate(a = 45) {
+					cylinder(r = 3);
+				}
+			}
+			translate(v = [3.5000000000, 15, 0]) {
+				rotate(a = 45) {
+					cylinder(r = 3);
+				}
+			}
+			translate(v = [3.5000000000, 21, 0]) {
+				rotate(a = 45) {
+					cylinder(r = 3);
+				}
+			}
+			translate(v = [3.5000000000, 27, 0]) {
+				rotate(a = 45) {
+					cylinder(r = 3);
 				}
 			}
 		}
@@ -366,10 +268,46 @@ class Mesh( Grill ):
         )
 
         return union() (
-            grill_a.put(),
-            grill_b
+            color("Blue") ( grill_a.put() ),
+            color("Red") ( grill_b )
         )
-        
+
+
+
+class MeshRow(Element):
+    def create( self ):
+        length = self.size.y
+        radius = 3
+        offset = 0
+
+        # the rest is added to the offset
+        rest = float(length) % (radius *2)
+
+        offset = radius
+        offset += rest / 2.0
+
+        holes = []
+
+        n = float(length) / (radius *2)
+
+        mesh_area = self.size.x - offset * 2
+
+        step = radius *2
+
+        for i in range(0, self.size.y, step):
+            holes.append(
+                translate([offset,radius+i,0]) (
+                    rotate(45) ( cylinder( radius ) )
+                )
+            )
+
+        holes = union() ( *holes )
+
+        return difference() (
+            cube( self.size() ),
+            holes
+        )
+
     
 class HoleGrill(Grill):
     
@@ -435,7 +373,7 @@ if __name__ == "__main__":
 
     e = PerforatedSection( 100 )
 
-    e = Mesh( Size( 20, 20, 1) )
+    e = MeshRow( Size( 25, 25, 1) )
 
     scad_render_to_file( e.put(), "project.scad" )
     

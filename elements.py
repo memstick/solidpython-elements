@@ -230,10 +230,46 @@ class Mesh( Grill ):
         )
 
         return union() (
-            grill_a.put(),
-            grill_b
+            color("Blue") ( grill_a.put() ),
+            color("Red") ( grill_b )
         )
-        
+
+
+
+class MeshRow(Element):
+    def create( self ):
+        length = self.size.y
+        radius = 3
+        offset = 0
+
+        # the rest is added to the offset
+        rest = float(length) % (radius *2)
+
+        offset = radius
+        offset += rest / 2.0
+
+        holes = []
+
+        n = float(length) / (radius *2)
+
+        mesh_area = self.size.x - offset * 2
+
+        step = radius *2
+
+        for i in range(0, self.size.y, step):
+            holes.append(
+                translate([offset,radius+i,0]) (
+                    rotate(45) ( cylinder( radius ) )
+                )
+            )
+
+        holes = union() ( *holes )
+
+        return difference() (
+            cube( self.size() ),
+            holes
+        )
+
     
 class HoleGrill(Grill):
     
@@ -299,7 +335,7 @@ if __name__ == "__main__":
 
     e = PerforatedSection( 100 )
 
-    e = Mesh( Size( 20, 20, 1) )
+    e = MeshRow( Size( 25, 25, 1) )
 
     scad_render_to_file( e.put(), "project.scad" )
     
