@@ -2,117 +2,11 @@
 
 translate(v = [0, 0, 0]) {
 	difference() {
-		cube(size = [33, 33, 1]);
 		union() {
-			translate(v = [0.0000000000, 0.0000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [0.0000000000, 6.6000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [0.0000000000, 13.2000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [0.0000000000, 19.8000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [0.0000000000, 26.4000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [0.0000000000, 33.0000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [6.6000000000, 0.0000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [6.6000000000, 6.6000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [6.6000000000, 13.2000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [6.6000000000, 19.8000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [6.6000000000, 26.4000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [6.6000000000, 33.0000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [13.2000000000, 0.0000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [13.2000000000, 6.6000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [13.2000000000, 13.2000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [13.2000000000, 19.8000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [13.2000000000, 26.4000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [13.2000000000, 33.0000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [19.8000000000, 0.0000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [19.8000000000, 6.6000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [19.8000000000, 13.2000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [19.8000000000, 19.8000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [19.8000000000, 26.4000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [19.8000000000, 33.0000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [26.4000000000, 0.0000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [26.4000000000, 6.6000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [26.4000000000, 13.2000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [26.4000000000, 19.8000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [26.4000000000, 26.4000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [26.4000000000, 33.0000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [33.0000000000, 0.0000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [33.0000000000, 6.6000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [33.0000000000, 13.2000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [33.0000000000, 19.8000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [33.0000000000, 26.4000000000, 0]) {
-				cube(size = 3);
-			}
-			translate(v = [33.0000000000, 33.0000000000, 0]) {
-				cube(size = 3);
-			}
+			cylinder(h = 10.0000000000, r = 24.0000000000);
+			cylinder(h = 1, r = 50, center = true);
 		}
+		cylinder(h = 20.0000000000, r = 20.0000000000, center = true);
 	}
 }
 /***********************************************
@@ -331,14 +225,22 @@ class MeshBox(Element):
         c = cube( [self.size.x, self.size.y, 1] )
         holes = []
 
-        x_points = partition( self.size.x, 5 )
-        y_points = partition( self.size.y, 5 )
+        x_points = partition( self.size.x, 21 )[1:]
+        y_points = partition( self.size.y, 3 )[1:]
+
+        x_median = x_points[len(x_points) // 2]
+        y_median = y_points[len(y_points) // 2]
+
+
+
+        x_median_delta = x_median - self.size.half('x')
+        y_median_delta = y_median - self.size.half('y')
 
         for i in x_points:
             for k in y_points:
                 holes.append(
-                    translate([i, k, 0]) (
-                        cube( 3 )
+                    translate([i-x_median_delta, k-y_median_delta, 0]) (
+                        cube( [1,1,1], center=True )
                     )
                 )
 
@@ -350,12 +252,38 @@ class MeshBox(Element):
         )
 
 
+class Roller( Element ):
+    def create( self ):
+
+        wall_thickness = self.parameters['wall_thickness']
+        wall_height = self.parameters['wall_height']
+        hole_diameter = self.parameters['hole_diameter']
+
+        circle = cylinder( self.size.x, self.size.z, center=True )
+        hole = cylinder( hole_diameter, wall_height * 2, center=True )
+
+        wall = cylinder( (wall_thickness * 2) + hole_diameter, wall_height )
+
+        result = difference() (
+            union() (
+                wall,
+                circle
+            ),
+            hole
+        )
+
+        return result
 
 
         
 if __name__ == "__main__":
 
-    e = MeshBox( Size(33, 33, 1) )
+    e = MeshBox( Size(45, 5, 1) )
+    e = Roller( Size( 50, 50, 1 ), parameters={
+        'hole_diameter': 20.0,
+        'wall_thickness': 2.0,
+        'wall_height': 10.0
+    })
     e.create()
 
     scad_render_to_file( e.put(), "project.scad" )

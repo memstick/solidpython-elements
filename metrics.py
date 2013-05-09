@@ -100,3 +100,6 @@ class Distance( Metric ):
         self.x = x if x else 0.0
         self.y = y if y else 0.0
         self.z = z if z else 0.0
+
+class RadialSize( Metric ):
+    pass

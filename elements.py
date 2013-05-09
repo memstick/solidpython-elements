@@ -210,14 +210,22 @@ class MeshBox(Element):
         c = cube( [self.size.x, self.size.y, 1] )
         holes = []
 
-        x_points = partition( self.size.x, 5 )
-        y_points = partition( self.size.y, 5 )
+        x_points = partition( self.size.x, 21 )[1:]
+        y_points = partition( self.size.y, 3 )[1:]
+
+        x_median = x_points[len(x_points) // 2]
+        y_median = y_points[len(y_points) // 2]
+
+
+
+        x_median_delta = x_median - self.size.half('x')
+        y_median_delta = y_median - self.size.half('y')
 
         for i in x_points:
             for k in y_points:
                 holes.append(
-                    translate([i, k, 0]) (
-                        cube( 3 )
+                    translate([i-x_median_delta, k-y_median_delta, 0]) (
+                        cube( [1,1,1], center=True )
                     )
                 )
 
@@ -229,12 +237,38 @@ class MeshBox(Element):
         )
 
 
+class Roller( Element ):
+    def create( self ):
+
+        wall_thickness = self.parameters['wall_thickness']
+        wall_height = self.parameters['wall_height']
+        hole_diameter = self.parameters['hole_diameter']
+
+        circle = cylinder( self.size.x, self.size.z, center=True )
+        hole = cylinder( hole_diameter, wall_height * 2, center=True )
+
+        wall = cylinder( (wall_thickness * 2) + hole_diameter, wall_height )
+
+        result = difference() (
+            union() (
+                wall,
+                circle
+            ),
+            hole
+        )
+
+        return result
 
 
         
 if __name__ == "__main__":
 
-    e = MeshBox( Size(33, 33, 1) )
+    e = MeshBox( Size(45, 5, 1) )
+    e = Roller( Size( 50, 50, 1 ), parameters={
+        'hole_diameter': 20.0,
+        'wall_thickness': 2.0,
+        'wall_height': 10.0
+    })
     e.create()
 
     scad_render_to_file( e.put(), "project.scad" )
