@@ -4,103 +4,12 @@ import doctest
 
 from math import sqrt
 
-class Metric:
-    def center( self, axis=None ):
-        return self.half( axis )
-    
-    def half( self, axis=None ):
-        """alias of center"""
-        return self.divide( axis, 2 )
-        
-    def third( self, axis ):
-        return self.divide( axis, 3 )
+from metrics import *
+from units import *
+from core import *
 
-    def quarter( self, axis ):
-        return self.divide( axis, 4 )
-    
-    def divide( self, axis, divisor ):
-        """
-        Returns a centerpoint between n equal parts.
-        """
-    
-        x = self.x / float(divisor)
-        y = self.y / float(divisor)
-        z = self.z / float(divisor)
-        
-        if axis:
-            if axis.lower() == 'x':
-                return x
-            elif axis.lower() == 'y':
-                return y
-            elif axis.lower() == 'z':
-                return z
-            else:
-                raise Error( 'The requested axis >>> {axis} <<< was not found'.format( axis=axis ) )
-        else:
-            return Position( x, y, z )
-            
 
-    def __call__( self, container_type=list ):
-        if container_type is list:
-            return [ self.x, self.y, self.z ];
 
-            
-    def __getitem__( self, item ):
-        x, y, z = 'x', 'y', 'z'
-        
-        if item.lower() == x:
-            return self.x
-        elif item.lower() == y:
-            return self.y
-        elif item.lower() == z:
-            return self.z
-        else:
-            raise Error( "Requested axis >>> {axis} <<< was not found".format(axis=item) )
-            
-    def __str__( self ):
-        return "[{self.x}, {self.y}, {self.z}]".format( self=self )
-    
-    def __repr__( self ):
-        return "[{self.x}, {self.y}, {self.z}]".format( self=self )
-
-class Position( Metric ):
-    def __init__( self, x=None, y=None, z=None ):
-        self.x = x if x else 0.0
-        self.y = y if y else 0.0
-        self.z = z if z else 0.0
-
-        
-class Size( Metric ):
-    def __init__( self, x=None, y=None, z=None ):
-        # default size definitions
-        self.x = x if x else 1.0
-        self.y = y if y else 1.0
-        self.z = z if z else 1.0
-
-    def diagonal( self, dimensions=2 ):
-        if dimensions == 2:
-            return sqrt( self.x**2 + self.y**2 )
-        else:
-            return sqrt( self.x**2 + self.y**2 + self.z**2 )
-    
-    def stretch( self, x=None, y=None, z=None ):
-        self.x = (self.x * x) if x else self.x
-        self.y = (self.y * y) if y else self.y
-        self.z = (self.z * z) if z else self.z
-        
-
-class Element:
-    def __init__( self, size ):
-        self.size = size
-    
-    def create( self ):
-        pass
-    
-    def put( self, position=None ):
-        position = position if position else [0, 0, 0]
-        return translate(position) ( 
-            self.create() 
-        )
 
         
 class Plate( Element ):
@@ -109,8 +18,6 @@ class Plate( Element ):
 
     def create( self ):
         return create_plate()
-        
-        
 
 class PerforatedPlate( Plate ):
     def __init__( self, size, hole_radius=None ):
@@ -132,7 +39,6 @@ class PerforatedPlate( Plate ):
                 self.create_hole()
             )
         )
-        
 
 
 class PerforatedRoundedPlate( PerforatedPlate ):
@@ -186,7 +92,6 @@ class PerforatedSection( Element ):
             ends, 
             bridge
         )
-    
 
     
 class Grill(Element):
@@ -235,40 +140,10 @@ class Mesh( Grill ):
         )
 
 
-
 class MeshRow(Element):
     def create( self ):
-        length = self.size.y
-        radius = 3
-        offset = 0
+        pass
 
-        # the rest is added to the offset
-        rest = float(length) % (radius *2)
-
-        offset = radius
-        offset += rest / 2.0
-
-        holes = []
-
-        n = float(length) / (radius *2)
-
-        mesh_area = self.size.x - offset * 2
-
-        step = radius *2
-
-        for i in range(0, self.size.y, step):
-            holes.append(
-                translate([offset,radius+i,0]) (
-                    rotate(45) ( cylinder( radius ) )
-                )
-            )
-
-        holes = union() ( *holes )
-
-        return difference() (
-            cube( self.size() ),
-            holes
-        )
 
     
 class HoleGrill(Grill):
@@ -327,16 +202,39 @@ class HoleGrill(Grill):
         
 class LineGrill( Grill ):
     pass
-    
+
+
+class MeshBox(Element):
+    def create( self ):
+
+        c = cube( [self.size.x, self.size.y, 1] )
+        holes = []
+
+        x_points = partition( self.size.x, 5 )
+        y_points = partition( self.size.y, 5 )
+
+        for i in x_points:
+            for k in y_points:
+                holes.append(
+                    translate([i, k, 0]) (
+                        cube( 3 )
+                    )
+                )
+
+        holes = union() ( *holes )
+
+        return difference() (
+            c,
+            holes
+        )
+
+
+
+
         
 if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
 
-    e = PerforatedSection( 100 )
-
-    e = MeshRow( Size( 25, 25, 1) )
+    e = MeshBox( Size(33, 33, 1) )
+    e.create()
 
     scad_render_to_file( e.put(), "project.scad" )
-    
-        

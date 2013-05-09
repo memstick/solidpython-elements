@@ -1,0 +1,12 @@
+The solidpython-elements package is a constructive solid geometry toolkit
+based on solidpython and OpenSCAD.
+
+The main goal of The Elements is to structure and rationalize the typical design
+workflow.
+
+All workflows are separated into three stages:
+1. Create all solid elements (children of Body) (create())
+2. Create all hull elements (children of Space) (create())
+3. Position the elements in the space (put())
+
+These happens part-wise: each part goes through the same order of assembly.
