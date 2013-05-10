@@ -2,11 +2,18 @@
 
 translate(v = [0, 0, 0]) {
 	difference() {
-		union() {
-			cylinder(h = 10.0000000000, r = 24.0000000000);
-			cylinder(h = 1, r = 50, center = true);
+		difference() {
+			union() {
+				cylinder(h = 10.0000000000, r = 24.0000000000);
+				cylinder(h = 1, r = 50, center = true);
+			}
+			cylinder(h = 20.0000000000, r = 20.0000000000, center = true);
 		}
-		cylinder(h = 20.0000000000, r = 20.0000000000, center = true);
+		rotate(a = 90, v = [0, 1, 0]) {
+			translate(v = [-5.0000000000, 0, 0]) {
+				cylinder(h = 50, r = 3.0000000000);
+			}
+		}
 	}
 }
 /***********************************************
@@ -258,18 +265,28 @@ class Roller( Element ):
         wall_thickness = self.parameters['wall_thickness']
         wall_height = self.parameters['wall_height']
         hole_diameter = self.parameters['hole_diameter']
+        wall_perforation_diameter = self.parameters['wall_perforation_diameter']
 
         circle = cylinder( self.size.x, self.size.z, center=True )
         hole = cylinder( hole_diameter, wall_height * 2, center=True )
 
         wall = cylinder( (wall_thickness * 2) + hole_diameter, wall_height )
 
+        wall_perforation = rotate(90, [0,1,0]) (
+            left(wall_height / 2.0) (
+                cylinder( wall_perforation_diameter, self.size.x )
+            )
+        )
+
         result = difference() (
-            union() (
-                wall,
-                circle
+            difference() (
+                union() (
+                    wall,
+                    circle
+                ),
+                hole
             ),
-            hole
+            wall_perforation
         )
 
         return result
@@ -282,9 +299,11 @@ if __name__ == "__main__":
     e = Roller( Size( 50, 50, 1 ), parameters={
         'hole_diameter': 20.0,
         'wall_thickness': 2.0,
-        'wall_height': 10.0
+        'wall_height': 10.0,
+        'wall_perforation_diameter': 3.0
     })
     e.create()
+
 
     scad_render_to_file( e.put(), "project.scad" )
  

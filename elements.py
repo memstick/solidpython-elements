@@ -243,18 +243,28 @@ class Roller( Element ):
         wall_thickness = self.parameters['wall_thickness']
         wall_height = self.parameters['wall_height']
         hole_diameter = self.parameters['hole_diameter']
+        wall_perforation_diameter = self.parameters['wall_perforation_diameter']
 
         circle = cylinder( self.size.x, self.size.z, center=True )
         hole = cylinder( hole_diameter, wall_height * 2, center=True )
 
         wall = cylinder( (wall_thickness * 2) + hole_diameter, wall_height )
 
+        wall_perforation = rotate(90, [0,1,0]) (
+            left(wall_height / 2.0) (
+                cylinder( wall_perforation_diameter, self.size.x )
+            )
+        )
+
         result = difference() (
-            union() (
-                wall,
-                circle
+            difference() (
+                union() (
+                    wall,
+                    circle
+                ),
+                hole
             ),
-            hole
+            wall_perforation
         )
 
         return result
@@ -264,11 +274,14 @@ class Roller( Element ):
 if __name__ == "__main__":
 
     e = MeshBox( Size(45, 5, 1) )
+
     e = Roller( Size( 50, 50, 1 ), parameters={
         'hole_diameter': 20.0,
         'wall_thickness': 2.0,
-        'wall_height': 10.0
+        'wall_height': 10.0,
+        'wall_perforation_diameter': 3.0
     })
     e.create()
+
 
     scad_render_to_file( e.put(), "project.scad" )
