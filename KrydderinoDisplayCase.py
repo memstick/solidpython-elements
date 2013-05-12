@@ -1,27 +1,3 @@
-
-
-translate(v = [0, 0, 0]) {
-	difference() {
-		union() {
-			color(c = "red") {
-				cube(center = true, size = [36.5000000000, 80.5000000000, 1]);
-			}
-			color(c = "blue") {
-				cube(center = true, size = [27.2, 72, 1.0]);
-			}
-		}
-		color(c = "green") {
-			cylinder(r = [37.7500000000, 15.7500000000, 1]);
-			cylinder(r = [-37.7500000000, 15.7500000000, 1]);
-			cylinder(r = [37.7500000000, -15.7500000000, 1]);
-			cylinder(r = [-37.7500000000, -15.7500000000, 1]);
-		}
-	}
-}
-/***********************************************
-******      SolidPython code:      *************
-************************************************
- 
 # -*- coding: utf-8 -*- 
 
 from core import *
@@ -55,7 +31,11 @@ class KrydderinoDisplayCase( Element ):
         ]
 
         for x,y in hole_coordinates:
-            holes.append( cylinder([x, y, self.size.z]) )
+            holes.append(
+                translate([x, y, self.size.z]) (
+                    cylinder()
+                )
+            )
 
 
 
@@ -87,7 +67,4 @@ if __name__ == "__main__":
         }
     )
 
-    scad_render_to_file( e.put(), "project.scad" ) 
- 
-***********************************************/
-                            
+    scad_render_to_file( e.put(), "project.scad" )
