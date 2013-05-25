@@ -3,6 +3,7 @@
 from solid import *
 from solid.utils import *
 
+from metrics import *
 
 def partition( m, n ):
 
@@ -29,6 +30,12 @@ class Element:
         """
         self.size = size
         self.parameters = parameters
+
+        self.s = self.size
+        self.p = self.parameters
+
+        self.sz = self.size
+        self.prmtrs = self.parameters
 
     def create( self ):
         pass
