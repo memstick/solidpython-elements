@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*- 
 
 from core import *
-from metrics import *
 
 from elements import PerforatedSection
 
@@ -134,9 +133,10 @@ class KrydderinoDisplayCase( Element ):
 
 if __name__ == "__main__":
     e = KrydderinoDisplayCase(
+        #Size( 36.5, 80.5, 1 ),
         Size( 36.5, 80.5, 1 ),
         parameters = {
-            "screen_area_size": Size( 27.2, 72 ),
+            "screen_area_size": Size( 27.2, 72.2 ),
             "hole_diameter": 2.5,
             "hole_area_size": Size( 75.5, 31.5 ),
             "front_thickness": 5.0,

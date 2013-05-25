@@ -10,6 +10,65 @@ from core import *
 
 
 
+class Primitive():
+    pass
+
+
+class Extrusion():
+    pass
+
+class CuboidFactory( Primitive ):
+    """
+    Can be a perfect cube.
+    """
+    pass
+
+class EllipsoidFactory( Primitive ):
+    """
+    Can be a sphere.
+    """
+    pass
+
+class CylinderFactory( Primitive ):
+    """
+    A circle extrusion.
+    """
+    pass
+
+
+
+class CircularExtrusion( Extrusion ):
+    """
+    An extrusion of a perfect (constant radius) circle.
+    """
+    pass
+
+class EllipticalExtrusion( Extrusion ):
+    """
+    An extrusion of an ellipsis, edined by two parameters.
+    """
+    pass
+
+class RectangularExtrusion( Extrusion ):
+    """
+    An extrusion of a Square
+    """
+    pass
+
+Cuboid = CuboidFactory()
+Ellipsoid = EllipsoidFactory()
+Cylinder = CylinderFactory()
+
+
+
+
+
+
+
+
+
+
+
 
         
 class Plate( Element ):

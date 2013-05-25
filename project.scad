@@ -1,55 +1,766 @@
 
 
 translate(v = [0, 0, 0]) {
-	difference() {
-		scale(v = [1, 1, 10.0000000000]) {
-			difference() {
-				union() {
-					color(c = "red") {
-						cube(center = true, size = [36.5000000000, 80.5000000000, 1]);
-					}
-					color(c = "yellow") {
-						union() {
-							translate(v = [15.7500000000, 37.7500000000, 0]) {
-								cylinder(h = 1, r = 5.0000000000, center = true);
-							}
-							translate(v = [-15.7500000000, 37.7500000000, 0]) {
-								cylinder(h = 1, r = 5.0000000000, center = true);
-							}
-							translate(v = [15.7500000000, -37.7500000000, 0]) {
-								cylinder(h = 1, r = 5.0000000000, center = true);
-							}
-							translate(v = [-15.7500000000, -37.7500000000, 0]) {
-								cylinder(h = 1, r = 5.0000000000, center = true);
-							}
-							cube(center = true, size = [41.5000000000, 75.5000000000, 1]);
-							cube(center = true, size = [31.5000000000, 85.5000000000, 1]);
-						}
-					}
-				}
-				color(c = "blue") {
-					cube(center = true, size = [27.2000000000, 72, 2.0000000000]);
-				}
-				color(c = "green") {
+	union() {
+		scale(v = [0.9000000000, 0.9000000000, 1]) {
+			intersection() {
+				difference() {
 					union() {
-						translate(v = [15.7500000000, 37.7500000000, 0]) {
-							cylinder(h = 1, r = 1.2500000000, center = true);
+						rotate(a = 0.0000000000, v = [0, 0, 1]) {
+							union() {
+								translate(v = [0, 5.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 8.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 11.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 14.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 17.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 20.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 23.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 26.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 29.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 32.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 35.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 38.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 41.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 44.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 47.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+							}
 						}
-						translate(v = [-15.7500000000, 37.7500000000, 0]) {
-							cylinder(h = 1, r = 1.2500000000, center = true);
+						rotate(a = 120.0000000000, v = [0, 0, 1]) {
+							union() {
+								translate(v = [0, 5.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 8.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 11.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 14.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 17.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 20.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 23.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 26.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 29.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 32.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 35.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 38.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 41.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 44.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 47.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+							}
 						}
-						translate(v = [15.7500000000, -37.7500000000, 0]) {
-							cylinder(h = 1, r = 1.2500000000, center = true);
+						rotate(a = 240.0000000000, v = [0, 0, 1]) {
+							union() {
+								translate(v = [0, 5.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 8.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 11.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 14.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 17.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 20.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 23.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 26.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 29.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 32.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 35.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 38.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 41.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 44.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+								translate(v = [0, 47.0000000000, 0]) {
+									union() {
+										rotate(a = 45, v = [0, 0, 1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+										rotate(a = 45, v = [0, 0, -1]) {
+											translate(v = [0, 3.5000000000, 0]) {
+												cube(center = true, size = [0.5000000000, 7.5000000000, 5]);
+											}
+										}
+									}
+								}
+							}
 						}
-						translate(v = [-15.7500000000, -37.7500000000, 0]) {
-							cylinder(h = 1, r = 1.2500000000, center = true);
+					}
+					cylinder(h = 5, r = 5.0000000000, center = true);
+				}
+				union() {
+					cylinder(h = 5, r = 5.0000000000, center = true);
+					union() {
+						rotate(a = 0.0000000000, v = [0, 0, 1]) {
+							translate(v = [0, 9.0000000000, 0]) {
+								union() {
+									cube(center = true, size = [10, 18.0000000000, 5]);
+									translate(v = [0, 9.0000000000, 0]) {
+										cylinder(h = 5, r = 5.0000000000, center = true);
+									}
+								}
+							}
+						}
+						rotate(a = 120.0000000000, v = [0, 0, 1]) {
+							translate(v = [0, 9.0000000000, 0]) {
+								union() {
+									cube(center = true, size = [10, 18.0000000000, 5]);
+									translate(v = [0, 9.0000000000, 0]) {
+										cylinder(h = 5, r = 5.0000000000, center = true);
+									}
+								}
+							}
+						}
+						rotate(a = 240.0000000000, v = [0, 0, 1]) {
+							translate(v = [0, 9.0000000000, 0]) {
+								union() {
+									cube(center = true, size = [10, 18.0000000000, 5]);
+									translate(v = [0, 9.0000000000, 0]) {
+										cylinder(h = 5, r = 5.0000000000, center = true);
+									}
+								}
+							}
 						}
 					}
 				}
 			}
 		}
-		translate(v = [0, 0, 1]) {
-			cube(center = true, size = [36.5000000000, 80.5000000000, 10.0000000000]);
+		difference() {
+			union() {
+				cylinder(h = 5, r = 5.0000000000, center = true);
+				union() {
+					rotate(a = 0.0000000000, v = [0, 0, 1]) {
+						translate(v = [0, 7.5000000000, 0]) {
+							union() {
+								cube(center = true, size = [10, 15, 5]);
+								translate(v = [0, 7.5000000000, 0]) {
+									cylinder(h = 5, r = 5.0000000000, center = true);
+								}
+							}
+						}
+					}
+					rotate(a = 120.0000000000, v = [0, 0, 1]) {
+						translate(v = [0, 7.5000000000, 0]) {
+							union() {
+								cube(center = true, size = [10, 15, 5]);
+								translate(v = [0, 7.5000000000, 0]) {
+									cylinder(h = 5, r = 5.0000000000, center = true);
+								}
+							}
+						}
+					}
+					rotate(a = 240.0000000000, v = [0, 0, 1]) {
+						translate(v = [0, 7.5000000000, 0]) {
+							union() {
+								cube(center = true, size = [10, 15, 5]);
+								translate(v = [0, 7.5000000000, 0]) {
+									cylinder(h = 5, r = 5.0000000000, center = true);
+								}
+							}
+						}
+					}
+				}
+			}
+			scale(v = [0.9000000000, 0.9000000000, 1]) {
+				union() {
+					cylinder(h = 5, r = 5.0000000000, center = true);
+					union() {
+						rotate(a = 0.0000000000, v = [0, 0, 1]) {
+							translate(v = [0, 9.0000000000, 0]) {
+								union() {
+									cube(center = true, size = [10, 18.0000000000, 5]);
+									translate(v = [0, 9.0000000000, 0]) {
+										cylinder(h = 5, r = 5.0000000000, center = true);
+									}
+								}
+							}
+						}
+						rotate(a = 120.0000000000, v = [0, 0, 1]) {
+							translate(v = [0, 9.0000000000, 0]) {
+								union() {
+									cube(center = true, size = [10, 18.0000000000, 5]);
+									translate(v = [0, 9.0000000000, 0]) {
+										cylinder(h = 5, r = 5.0000000000, center = true);
+									}
+								}
+							}
+						}
+						rotate(a = 240.0000000000, v = [0, 0, 1]) {
+							translate(v = [0, 9.0000000000, 0]) {
+								union() {
+									cube(center = true, size = [10, 18.0000000000, 5]);
+									translate(v = [0, 9.0000000000, 0]) {
+										cylinder(h = 5, r = 5.0000000000, center = true);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
@@ -57,153 +768,166 @@ translate(v = [0, 0, 0]) {
 ******      SolidPython code:      *************
 ************************************************
  
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
 from core import *
-from metrics import *
-
-from elements import PerforatedSection
 
 
+class Vertex(Element):
 
-class KrydderinoDisplayCase( Element ):
+    def get_edge_ends( self ):
+        unit = 360.0 / self.p.get('number_of_edges')
 
-    def create_rounded_frame( self, corner_offset, hole_diameter, hole_coordinates ):
-        corners = []
-        walls = []
-        for x,y in hole_coordinates:
-            corners.append(
-                translate( [x, y, 0] ) (
-                    cylinder(
-                        corner_offset,
-                        self.size.z,
-                        center=True
+        return [ i * unit for i in range(self.p.get('number_of_edges') ) ]
+
+
+    def create_centerpiece(self):
+        return cylinder(
+            r=self.prmtrs.get('centerpiece_radius'),
+            h=self.s.z,
+            center=True
+        )
+
+    def create_edges(self, length_factor=1):
+        edges = []
+
+        for angle in self.get_edge_ends():
+            edges.append(
+                rotate( angle, [0,0,1] ) (
+                    translate( [0, self.s.half('y') * length_factor, 0] ) (
+                        union() (
+                            cube(
+                                [ self.s.x, self.s.y * length_factor, self.s.z ],
+                                center=True
+                            ),
+
+                            translate([0, self.s.half('y') * length_factor, 0]) (
+                                cylinder(
+                                    self.s.half('x'),
+                                    self.s.z,
+                                    center=True
+                                )
+                            )
+                        )
                     )
                 )
             )
 
-        walls = [
-            cube(
-                [
-                    self.size.x + (hole_diameter * 2),
-                    self.size.y - (hole_diameter * 2),
-                    self.size.z
-                ],
-                center=True
+        return union() ( *edges )
+
+
+    def create_contours(self):
+
+        return union() (
+            self.create_centerpiece(),
+            self.create_edges()
+        )
+
+    def create_inner_contours(self):
+
+        return union() (
+            self.create_centerpiece(),
+            self.create_edges( length_factor=1.2 )
+        )
+
+    def create_angle( self ):
+
+        angle_anchor = self.s.quarter('y') - ( self.p.get('mesh_thickness') / 2.0 )
+
+        return union() (
+            rotate( self.p.get('mesh_angle'),[0, 0, 1] ) (
+                translate( [0, angle_anchor, 0] ) (
+                    cube( [ self.p.get('mesh_thickness'), self.s.half('y'), self.s.z], center=True )
+                )
             ),
 
-            cube(
-                [
-                    self.size.x - (hole_diameter * 2),
-                    self.size.y + (hole_diameter * 2),
-                    self.size.z
-                ],
-                center=True
-            )
-        ]
-
-        return union() ( corners, walls )
-
-
-    def create(self):
-
-        total_height = self.parameters.get('total_height')
-        screen_area_size = self.parameters.get('screen_area_size')
-        hole_area_size =  self.parameters.get('hole_area_size')
-        hole_diameter = self.parameters.get('hole_diameter')
-        front_thickness = self.parameters.get('front_thickness')
-
-        self.size.z = 1
-
-        # pcb area
-        pcb = cube( self.size(), center=True )
-
-        # screen area
-        screen = cube([
-                screen_area_size.x,
-                screen_area_size.y,
-                screen_area_size.z + 1],
-            center=True )
-
-        # holes
-        holes = []
-
-        hole_coordinates = [
-            ( hole_area_size.y / 2.0, hole_area_size.x / 2.0 ),
-            ( - hole_area_size.y / 2.0, hole_area_size.x / 2.0 ),
-            ( hole_area_size.y / 2.0, -hole_area_size.x / 2.0 ),
-            ( - hole_area_size.y / 2.0, -hole_area_size.x / 2.0 )
-        ]
-        # [  1,  1 ]
-        # [ -1,  1 ]
-        # [  1, -1 ]
-        # [ -1, -1 ]
-
-        for x,y in hole_coordinates:
-            holes.append(
-                translate( [x, y, 0] ) (
-                    cylinder(
-                        hole_diameter / 2.0,
-                        self.size.z,
-                        center=True
-                    )
-                )
-            )
-
-        holes = union() ( *holes )
-
-
-        bottom = union() (
-            color("red") (pcb),
-            color("yellow") (
-                self.create_rounded_frame(
-                    hole_diameter * 2,
-                    hole_diameter,
-                    hole_coordinates
+            rotate( self.p.get('mesh_angle'), [0, 0, -1]) (
+                translate( [0, angle_anchor, 0] ) (
+                    cube( [ self.p.get('mesh_thickness'), self.s.half('y'), self.s.z], center=True )
                 )
             )
         )
 
+    def create_edge_mesh( self ):
+        angles = []
+        offset = self.p.get('centerpiece_radius')
 
-        bottom = difference() (
-            bottom,
-            color("blue") (screen),
-            color("green") (holes)
+        for i in range( self.s.y ):
+            angles.append(
+                translate( [ 0, offset, 0 ] ) (
+                    self.create_angle()
+                )
+            )
+            offset += self.p.get('mesh_spacing')
+
+        return union() (
+            *angles
         )
 
 
-        # create walls
-        body = scale([1, 1, total_height]) ( bottom )
+    def create_inner_mesh(self):
 
-        body_hull = translate([0,0,self.size.z]) (
-            cube( [
-                    self.size.x,
-                    self.size.y,
-                    total_height
-                ],
-                center=True
+        centerpiece = self.create_centerpiece()
+
+        edges = []
+
+        for angle in self.get_edge_ends():
+            edges.append(
+                rotate( angle, [0,0,1] ) (
+                    self.create_edge_mesh()
+                )
+            )
+
+        return intersection() (
+            difference() (
+                union() (
+                    *edges
+                ),
+                centerpiece
+            ),
+            self.create_inner_contours()
+        )
+
+
+    def get_inner_factor(self):
+        return abs( float( self.s.x - self.p.get('wall_thickness') * 2 ) / self.s.x )
+
+
+    def create( self ):
+
+        factor = self.get_inner_factor()
+
+        return union() (
+            # the inner mesh
+            scale( [factor, factor, 1] ) (
+                self.create_inner_mesh()
+            ),
+            # the wall-size contour extrusion
+            difference() (
+                self.create_contours(),
+                scale( [factor, factor, 1] ) (
+                    self.create_inner_contours()
+                )
             )
         )
 
-        body = difference() ( body, body_hull )
-
-        return body
 
 
 
 if __name__ == "__main__":
-    e = KrydderinoDisplayCase(
-        Size( 36.5, 80.5, 1 ),
-        parameters = {
-            "screen_area_size": Size( 27.2, 72 ),
-            "hole_diameter": 2.5,
-            "hole_area_size": Size( 75.5, 31.5 ),
-            "front_thickness": 5.0,
-            "total_height": 10.0
-        }
-    )
+    v = Vertex( Size( 10, 15, 5 ), parameters = {
+        'number_of_edges': 3,
+        'centerpiece_radius': 5.0,
+        'wall_thickness': 0.5,
+        'mesh_thickness': 0.5,
+        'mesh_spacing': 3.0,
+        'mesh_angle': 45
+    })
 
-    scad_render_to_file( e.put(), "project.scad" ) 
+
+    v.create()
+
+    scad_render_to_file( v.put(), "project.scad" ) 
  
 ***********************************************/
                             
