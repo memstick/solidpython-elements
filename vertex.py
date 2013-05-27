@@ -57,7 +57,7 @@ class Vertex(Element):
 
         return union() (
             self.create_centerpiece(),
-            self.create_edges( length_factor=1.2 )
+            self.create_edges( length_factor=1 )
         )
 
     def create_angle( self ):
@@ -127,6 +127,13 @@ class Vertex(Element):
 
         factor = self.get_inner_factor()
 
+        centerpiece_factor = \
+            self.p.get('centerpiece_radius') / \
+            float( self.size.x + self.p.get('centerpiece_radius') )
+
+        cf = centerpiece_factor
+        isp = self.p.get('inlay_size_proportion')
+
         return union() (
             # the inner mesh
             scale( [factor, factor, 1] ) (
@@ -138,6 +145,20 @@ class Vertex(Element):
                 scale( [factor, factor, 1] ) (
                     self.create_inner_contours()
                 )
+            ),
+            difference() (
+                # the hole to accomodate inlay
+                rotate(180, [0, 0, -1]) (
+                    scale([cf, cf, self.s.z]) (
+                        self.create_contours()
+                    )
+                ),
+                # the inlay
+                rotate(180, [0, 0, -1]) (
+                    scale([cf / isp, cf / isp, self.s.z]) (
+                        self.create_contours()
+                    )
+                ),
             )
         )
 
@@ -145,13 +166,14 @@ class Vertex(Element):
 
 
 if __name__ == "__main__":
-    v = Vertex( Size( 10, 15, 5 ), parameters = {
-        'number_of_edges': 3,
+    v = Vertex( Size( 12, 20, 1 ), parameters = {
+        'number_of_edges': 4,
         'centerpiece_radius': 5.0,
         'wall_thickness': 0.5,
         'mesh_thickness': 0.5,
         'mesh_spacing': 3.0,
-        'mesh_angle': 45
+        'mesh_angle': 45,
+        'inlay_size_proportion': 1.614
     })
 
 
