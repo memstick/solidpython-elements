@@ -18,20 +18,21 @@ class Vertex(Element):
             center=True
         )
 
-    def create_edges(self, length_factor=1):
+    def create_edges( self ):
         edges = []
+
 
         for angle in self.get_edge_ends():
             edges.append(
                 rotate( angle, [0,0,1] ) (
-                    translate( [0, self.s.half('y') * length_factor, 0] ) (
+                    translate( [0, self.s.half('y'), 0] ) (
                         union() (
                             cube(
-                                [ self.s.x, self.s.y * length_factor, self.s.z ],
+                                [ self.s.x, self.s.y, self.s.z ],
                                 center=True
                             ),
 
-                            translate([0, self.s.half('y') * length_factor, 0]) (
+                            translate([0, self.s.half('y'), 0]) (
                                 cylinder(
                                     self.s.half('x'),
                                     self.s.z,
@@ -57,7 +58,7 @@ class Vertex(Element):
 
         return union() (
             self.create_centerpiece(),
-            self.create_edges( length_factor=1.2 )
+            self.create_edges()
         )
 
     def create_angle( self ):
@@ -145,12 +146,12 @@ class Vertex(Element):
 
 
 if __name__ == "__main__":
-    v = Vertex( Size( 10, 15, 5 ), parameters = {
-        'number_of_edges': 3,
-        'centerpiece_radius': 5.0,
-        'wall_thickness': 0.5,
-        'mesh_thickness': 0.5,
-        'mesh_spacing': 3.0,
+    v = Vertex( Size( 13, 35, 5 ), parameters = {
+        'number_of_edges': 5,
+        'centerpiece_radius': 10.0,
+        'wall_thickness': 2.0,
+        'mesh_thickness': 2.0,
+        'mesh_spacing': 5.0,
         'mesh_angle': 45
     })
 
