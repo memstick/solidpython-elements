@@ -58,7 +58,11 @@ class Vertex(Element):
 
         return union() (
             self.create_centerpiece(),
+<<<<<<< HEAD
             self.create_edges()
+=======
+            self.create_edges( length_factor=1 )
+>>>>>>> 35492df303f9d3734a3d62acd3cc389b225acb37
         )
 
     def create_angle( self ):
@@ -128,6 +132,16 @@ class Vertex(Element):
 
         factor = self.get_inner_factor()
 
+        centerpiece_factor = \
+            self.p.get('centerpiece_radius') / \
+            float( self.size.x + self.p.get('centerpiece_radius') )
+
+        cf = centerpiece_factor
+        isp = self.p.get('inlay_size_proportion')
+
+        # rotation for the number of edges
+        r = 180.0 / self.p.get("number_of_edges")
+
         return union() (
             # the inner mesh
             scale( [factor, factor, 1] ) (
@@ -139,6 +153,20 @@ class Vertex(Element):
                 scale( [factor, factor, 1] ) (
                     self.create_inner_contours()
                 )
+            ),
+            difference() (
+                # the hole to accomodate inlay
+                rotate(r, [0, 0, -1]) (
+                    scale([cf, cf, self.s.z]) (
+                        self.create_contours()
+                    )
+                ),
+                # the inlay
+                rotate(r, [0, 0, -1]) (
+                    scale([cf / isp, cf / isp, self.s.z]) (
+                        self.create_contours()
+                    )
+                ),
             )
         )
 
@@ -146,6 +174,7 @@ class Vertex(Element):
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     v = Vertex( Size( 13, 35, 5 ), parameters = {
         'number_of_edges': 5,
         'centerpiece_radius': 10.0,
@@ -153,6 +182,16 @@ if __name__ == "__main__":
         'mesh_thickness': 2.0,
         'mesh_spacing': 5.0,
         'mesh_angle': 45
+=======
+    v = Vertex( Size( 15, 35, 1 ), parameters = {
+        'number_of_edges': 5,
+        'centerpiece_radius': 5.0,
+        'wall_thickness': 2.0,
+        'mesh_thickness': 3.5,
+        'mesh_spacing': 10.0,
+        'mesh_angle': 45,
+        'inlay_size_proportion': 1.614
+>>>>>>> 35492df303f9d3734a3d62acd3cc389b225acb37
     })
 
 

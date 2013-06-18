@@ -45,3 +45,17 @@ class Element:
         return translate(position) (
             self.create()
         )
+
+
+class Parameters:
+    def __init__( self, elements, default=0.0 ):
+        self.elements = elements
+        self.default = default
+
+    def __getitem__( self, name ):
+        if self.elements.get('name'):
+            return self.elements['name']
+        else:
+            print "Warning, the '{0}' property was not found, defaults to {1}.".format(
+                name, self.default )
+            return self.default
