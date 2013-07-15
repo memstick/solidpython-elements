@@ -7,7 +7,38 @@ from pandas.io.parsers import read_csv
 
 class Representation( Element ):
     def create(self):
-        return cube(5, center=True)
+        data    =   self.p.get( 'values' )
+        n       =   self.p.get( 'number_of_segments' )
+        height  =   self.p.get( 'segment_height' )
+        base_radius = self.p.get('base_radius')
+
+        # calculate step
+        if len(data) > n:
+            step = int( len(data) / float(n) )
+        else:
+            step = 1
+
+        filtered_data = data[::step]
+
+        current_height = 0.0
+
+        segments = []
+
+        for v in filtered_data:
+            segments.append(
+                up(current_height) (
+                    cylinder(
+                        h=height,
+                        r=((1.0+v) * base_radius ),
+                        center=True
+                    )
+                )
+            )
+
+            current_height += height
+
+
+        return union() ( *segments )
 
 
 
@@ -28,6 +59,8 @@ if __name__ == "__main__":
 
     acceleration = data[['accel_x', 'accel_y', 'accel_z']].copy()
 
+
+    acceleration = acceleration[1250:3250]
 
     # calculates total acceleration from three axes
     total_acceleration = []
@@ -56,14 +89,23 @@ if __name__ == "__main__":
         (float(a) / range) for a in total_acceleration
     ]
 
-    print scaled_total_acceleration[0:50]
+    """
+    from pandas import DataFrame
+    import matplotlib.pyplot as plt
+
+    p = DataFrame( scaled_total_acceleration )
+    p.plot()
+    plt.show()
+    """
 
 
     e = Representation(
         Size(1,1,1),
         parameters={
-            "segments": 720,
-            "values": data
+            "number_of_segments": len( scaled_total_acceleration ),
+            "base_radius": 100.0,
+            "values": scaled_total_acceleration,
+            "segment_height": 1.0
         }
     )
 
