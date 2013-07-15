@@ -2019,6 +2019,17 @@ sys.setrecursionlimit(12000)
 
 
 class Representation( Element ):
+
+    def get_circle_points( self, r, n ):
+        points = []
+        for t in range( 0, n ):
+            x = a + r * cos(t)
+            y = b + r * sin(t)
+            points.append( (x, y) )
+
+        return points
+
+
     def create_linear(self):
         data    =   self.p.get( 'values' )
         n       =   self.p.get( 'number_of_segments' )
@@ -2076,6 +2087,8 @@ class Representation( Element ):
         current_angle = 0.0
 
         segments = []
+
+
 
         for v in filtered_data:
             segments.append(
@@ -2165,6 +2178,9 @@ if __name__ == "__main__":
             "segment_height": 0.5
         }
     )
+
+    print e.get_circle_points
+
 
     e.create()
 
