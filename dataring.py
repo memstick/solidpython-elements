@@ -1,12 +1,3 @@
-
-
-translate(v = [0, 0, 0]) {
-	cube(center = true, size = 5);
-}
-/***********************************************
-******      SolidPython code:      *************
-************************************************
- 
 # -*- coding: utf-8 -*-
 
 from core import *
@@ -48,7 +39,4 @@ if __name__ == "__main__":
 
     e.create()
 
-    scad_render_to_file( e.put(), "project.scad" ) 
- 
-***********************************************/
-                            
+    scad_render_to_file( e.put(), "project.scad" )

@@ -11,8 +11,13 @@ class Tower( Element ):
 
         increment = ( largest - smallest ) / float( self.p.get('number_of_rings') - 1 )
 
-        return [ smallest + ( i*increment ) for i in range( 0, n ) ]
+        print "Ring size increment: ", increment
+        print "Total height: ", ( n * self.p.get("ring_height") )
 
+        return reversed( [ smallest + ( i*increment ) for i in range( 0, n ) ] )
+
+    def get_ring_height_distribution( self ):
+        pass
 
     def create_ring( self, radius ):
 
@@ -27,12 +32,14 @@ class Tower( Element ):
 
         for i,r in enumerate(self.get_ring_size_distribution()):
             rings.append(
-                translate( [0, 0, i * self.p.get('ring_height')] ) (
+                translate( [0, 0, (i * self.p.get('ring_height'))] ) (
                     self.create_ring( r )
                 )
             )
 
         return union() ( *rings )
+
+
 
 if __name__ == "__main__":
 
@@ -44,6 +51,7 @@ if __name__ == "__main__":
         'hole_radius': 2
     })
 
+    surface() ()
 
     t.create()
 
