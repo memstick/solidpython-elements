@@ -5,8 +5,11 @@ from csv import reader
 from pandas.io.parsers import read_csv
 
 
+sys.setrecursionlimit(12000)
+
+
 class Representation( Element ):
-    def create(self):
+    def create_linear(self):
         data    =   self.p.get( 'values' )
         n       =   self.p.get( 'number_of_segments' )
         height  =   self.p.get( 'segment_height' )
@@ -29,7 +32,7 @@ class Representation( Element ):
                 up(current_height) (
                     cylinder(
                         h=height,
-                        r=((1.0+v) * base_radius ),
+                        r=((1.0 + v) * base_radius ),
                         center=True
                     )
                 )
@@ -39,6 +42,52 @@ class Representation( Element ):
 
 
         return union() ( *segments )
+
+
+    def create(self):
+        data    =   self.p.get( 'values' )
+        n       =   self.p.get( 'number_of_segments' )
+        height  =   self.p.get( 'segment_height' )
+        base_radius = self.p.get('base_radius')
+
+        tick = 360.0 / n
+
+
+
+        # calculate step
+        if len(data) > n:
+            step = int( len(data) / float(n) )
+        else:
+            step = 1
+
+        filtered_data = data[::step]
+
+        current_height = 0.0
+        current_angle = 0.0
+
+        segments = []
+
+
+
+        for v in filtered_data:
+            segments.append(
+                rotate( current_angle, [0,1,0] ) (
+                    translate([0,0,current_height]) (
+                        cylinder(
+                            h=height,
+                            r=((1.0 + v) * base_radius ),
+                            center=True
+                        )
+                    )
+                )
+            )
+
+            current_height += height
+            current_angle += tick
+
+
+        return union() ( *segments )
+
 
 
 
@@ -102,10 +151,10 @@ if __name__ == "__main__":
     e = Representation(
         Size(1,1,1),
         parameters={
-            "number_of_segments": len( scaled_total_acceleration ),
-            "base_radius": 100.0,
+            "number_of_segments": 360.0,
+            "base_radius": 25.0,
             "values": scaled_total_acceleration,
-            "segment_height": 1.0
+            "segment_height": 0.5
         }
     )
 
