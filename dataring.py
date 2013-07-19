@@ -10,18 +10,19 @@ sys.setrecursionlimit(12000)
 
 class Representation( Element ):
 
-    def get_circle_points( self, r, n ):
+
+    def get_circle( self, r, n ):
         points = []
 
-        for t in range( 0, n ):
+        for t in range( 0, int(2*pi) ):
             x = r * cos(t)
             y = r * sin(t)
-            points.append( (x, y) )
+            points.append( [x,y] )
 
         return points
 
 
-    def create_linear(self):
+    def create_linear( self ):
         data    =   self.p.get( 'values' )
         n       =   self.p.get( 'number_of_segments' )
         height  =   self.p.get( 'segment_height' )
@@ -65,7 +66,6 @@ class Representation( Element ):
         tick = 360.0 / n
 
 
-
         # calculate step
         if len(data) > n:
             step = int( len(data) / float(n) )
@@ -79,15 +79,17 @@ class Representation( Element ):
 
         segments = []
 
+        positions = self.get_circle(
+            self.p.get('circle_radius'), n
+        )
 
-
-        for v in filtered_data:
+        for (v, pos) in zip( filtered_data, positions ):
             segments.append(
-                rotate( current_angle, [0,1,0] ) (
-                    translate([0,0,current_height]) (
+                rotate( current_angle, [0, 1, 0] ) (
+                    translate([ 0, pos[0], pos[1] ]) (
                         cylinder(
                             h=height,
-                            r=((1.0 + v) * base_radius ),
+                            r=( (1.0 + v) * base_radius ),
                             center=True
                         )
                     )
@@ -139,21 +141,22 @@ if __name__ == "__main__":
         max( total_acceleration )
     )
 
-    range = interval[1] - interval[0]
+    data_range = interval[1] - interval[0]
 
     # print the range of values
     print "Data interval:", interval
-    print "Range:", range
+    print "Range:", data_range
 
     # scale the data to the range
     scaled_total_acceleration = [
-        (float(a) / range) for a in total_acceleration
+        (float(a) / data_range) for a in total_acceleration
     ]
 
-    """
+
     from pandas import DataFrame
     import matplotlib.pyplot as plt
 
+    """
     p = DataFrame( scaled_total_acceleration )
     p.plot()
     plt.show()
@@ -163,14 +166,13 @@ if __name__ == "__main__":
     e = Representation(
         Size(1,1,1),
         parameters={
-            "number_of_segments": 360.0,
+            "number_of_segments": 360,
             "base_radius": 25.0,
             "values": scaled_total_acceleration,
-            "segment_height": 0.5
+            "segment_height": 0.5,
+            "circle_radius": 50.0
         }
     )
-
-    print e.get_circle_points( 1, 1 )
 
 
     e.create()
