@@ -146,9 +146,6 @@ if __name__ == "__main__":
         )
 
 
-
-    arc_inverted( rad=10, start_degrees=0, end_degrees=90)
-
     # find the working range for the total acceleration set
 
     interval = (
