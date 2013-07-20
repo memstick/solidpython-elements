@@ -5,7 +5,17 @@ from csv import reader
 from pandas.io.parsers import read_csv
 
 
-sys.setrecursionlimit(12000)
+def circle( self, r, n ):
+    points = []
+
+    for t in range( 0, int(2*pi) ):
+        x = r * cos(t)
+        y = r * sin(t)
+        points.append( [x,y] )
+
+    return points
+
+
 
 
 class Representation( Element ):
@@ -14,9 +24,11 @@ class Representation( Element ):
     def get_circle( self, r, n ):
         points = []
 
-        for t in range( 0, int(2*pi) ):
-            x = r * cos(t)
-            y = r * sin(t)
+        t = [ (i * ( (2*pi) / float(n) )) for i in range( 0, n ) ]
+
+        for i in t:
+            x = r * cos(i)
+            y = r * sin(i)
             points.append( [x,y] )
 
         return points
@@ -85,8 +97,8 @@ class Representation( Element ):
 
         for (v, pos) in zip( filtered_data, positions ):
             segments.append(
-                rotate( current_angle, [0, 1, 0] ) (
-                    translate([ 0, pos[0], pos[1] ]) (
+                translate([ 0, pos[0], pos[1] ]) (
+                    rotate( current_angle, [1, 0, 0] ) (
                         cylinder(
                             h=height,
                             r=( (1.0 + v) * base_radius ),
@@ -107,6 +119,7 @@ class Representation( Element ):
 
 if __name__ == "__main__":
 
+    sys.setrecursionlimit( 12000 )
 
     with open( 'data.txt', 'rb' ) as source:
         data = read_csv(
@@ -133,6 +146,8 @@ if __name__ == "__main__":
         )
 
 
+
+    arc_inverted( rad=10, start_degrees=0, end_degrees=90)
 
     # find the working range for the total acceleration set
 
@@ -166,11 +181,11 @@ if __name__ == "__main__":
     e = Representation(
         Size(1,1,1),
         parameters={
-            "number_of_segments": 360,
+            "number_of_segments": 36,
             "base_radius": 25.0,
             "values": scaled_total_acceleration,
-            "segment_height": 0.5,
-            "circle_radius": 50.0
+            "segment_height": 20.0,
+            "circle_radius": 100.0
         }
     )
 
