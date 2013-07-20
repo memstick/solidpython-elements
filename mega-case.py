@@ -4,5 +4,21 @@ from core import *
 
 
 
+class Enclosure( Element ):
+    def create( self ):
+        return cube( [ self.s.x, self.s.y, self.s.z ] )
+
+
+
 if __name__ == "__main__":
-    pass
+
+    e = Enclosure(
+        Size( 101.6, 53.3, 1.0 ),
+        parameters={
+            "": 1.0
+        }
+    )
+
+    e.create()
+
+    scad_render_to_file( e.put(), "project.scad" )

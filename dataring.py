@@ -164,24 +164,13 @@ if __name__ == "__main__":
         (float(a) / data_range) for a in total_acceleration
     ]
 
-
-    from pandas import DataFrame
-    import matplotlib.pyplot as plt
-
-    """
-    p = DataFrame( scaled_total_acceleration )
-    p.plot()
-    plt.show()
-    """
-
-
     e = Representation(
         Size(1,1,1),
         parameters={
-            "number_of_segments": 36,
+            "number_of_segments": 72,
             "base_radius": 25.0,
             "values": scaled_total_acceleration,
-            "segment_height": 20.0,
+            "segment_height": 1.0,
             "circle_radius": 100.0
         }
     )
