@@ -48,16 +48,26 @@ class Inlay( Element ):
 
         cyls = union()(cyl1, cyl2, cyl3, cyl4)
 
-        cyls = down()
+        cyls = down(8) (cyls)
+        cyls = back(29.5) (cyls)
+        cyls = left(16.54) (cyls)
+
+        smallhole = cube([15, 8, 4], center=True)
+        smallhole = back(50) (smallhole)
+        smallhole = left(14) (smallhole)
+        smallhole = up(3) (smallhole)
+
 
         form =  difference() (
                 back(15)(
                     cube(
                         [ self.p.get('top-width'),
                             self.p.get('top-length') + 30.0,
-                            self.p.get('top-height') ], center=True )),
-                        self.create_bottom_hole()
-                        )
+                            self.p.get('top-height') 
+                        ], center=True )
+                    ),
+                    union() (self.create_bottom_hole(), cyls, smallhole)
+                )
 
         return up(height) (union()(form, cyls))
 
