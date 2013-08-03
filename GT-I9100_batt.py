@@ -14,14 +14,14 @@ class Inlay( Element ):
 
         cyl1 = up(10)(
                 rotate(90, [1,0,0]) (
-                    cylinder(0.64, 30)
+                    cylinder(0.64, 30, segments=32)
                     )
                 )
 
         cyl2 = up(10)(
-                right(1.74)(
+                right(2.59)(
                     rotate(90, [1,0,0]) (
-                        cylinder(0.64, 30)
+                        cylinder(0.64, 30, segments=32)
                         )
                     )
                 )
@@ -29,9 +29,9 @@ class Inlay( Element ):
 
 
         cyl3 = up(10)(
-                right(3.5)(
+                right(2*2.59)(
                     rotate(90, [1,0,0]) (
-                        cylinder(0.64, 30)
+                        cylinder(0.64, 30, segments=32)
                         )
                     )
                 )
@@ -39,23 +39,29 @@ class Inlay( Element ):
 
         
         cyl4 = up(10)(
-                right(5.23)(
+                right(3*2.59)(
                     rotate(90, [1,0,0]) (
-                        cylinder(0.64, 30)
+                        cylinder(0.64, 30, segments=32)
                         )
                     )
                 )
 
         cyls = union()(cyl1, cyl2, cyl3, cyl4)
 
-        cyls = down(8) (cyls)
-        cyls = back(29.5) (cyls)
-        cyls = left(16.54) (cyls)
+        cyls = down(10) (cyls)
+        cyls = back(29.4) (cyls)
+        cyls = left(15) (cyls)
 
-        smallhole = cube([15, 8, 4], center=True)
+        smallhole = cube([15, 8, 7], center=True)
         smallhole = back(50) (smallhole)
-        smallhole = left(14) (smallhole)
-        smallhole = up(3) (smallhole)
+        smallhole = left(11.3) (smallhole)
+        smallhole = up(2) (smallhole)
+
+        fill = cube([25, 25, 3], center=True)
+        fill = back(50) (fill)
+        fill = right(12) (fill)
+        fill = up(3) (fill)
+
 
 
         form =  difference() (
@@ -66,19 +72,21 @@ class Inlay( Element ):
                             self.p.get('top-height') 
                         ], center=True )
                     ),
-                    union() (self.create_bottom_hole(), cyls, smallhole)
+                    union() (self.create_bottom_hole(), cyls, smallhole, fill)
                 )
 
-        return up(height) (union()(form, cyls))
+        return up(height) (form)
 
     def create_bottom_hole( self ):
         height = self.get_base_height()
 
-        return up( height ) ( 
-                        cube(
-                            [ self.p.get('bottom-width'), self.p.get('bottom-length'), self.p.get('bottom-height') ],
+        increase = 3.5
+
+        return up( (((self.p.get('top-height') - self.p.get('bottom-height')) / 2) + 0.1) ) ( 
+                        forward(1.8) (cube(
+                            [ self.p.get('bottom-width'), self.p.get('bottom-length') + increase, self.p.get('bottom-height') ],
                             center=True
-                        ), 
+                        )), 
                     )
 
     def create_separator( self ):
@@ -148,7 +156,7 @@ if __name__ == "__main__":
     e = Inlay(
         Size(1,1,1),
         parameters = {
-            'top-height': 8.0,
+            'top-height': 7.0,
             'top-width': 60.0,
             'top-length': 70.0,
             'separator-height': 1.0,
