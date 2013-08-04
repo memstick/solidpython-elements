@@ -9,36 +9,36 @@ translate(v = [0, 0, 0]) {
 			union() {
 				translate(v = [0, 0, 0.6000000000]) {
 					translate(v = [0, 1.8000000000, 0]) {
-						cube(center = true, size = [47.0000000000, 62.5000000000, 6.0000000000]);
+						cube(center = true, size = [47.0000000000, 60.8000000000, 6.0000000000]);
 					}
 				}
-				translate(v = [-15, 0, 0]) {
-					translate(v = [0, -29.4000000000, 0]) {
+				translate(v = [-15.6000000000, 0, 0]) {
+					translate(v = [0, -28.5000000000, 0]) {
 						translate(v = [0, 0, -10]) {
 							union() {
 								translate(v = [0, 0, 10]) {
 									rotate(a = 90, v = [1, 0, 0]) {
-										cylinder($fn = 32, h = 30, r = 0.6400000000);
+										cylinder($fn = 32, h = 30, r = 1.0200000000);
 									}
 								}
 								translate(v = [0, 0, 10]) {
 									translate(v = [2.5900000000, 0, 0]) {
 										rotate(a = 90, v = [1, 0, 0]) {
-											cylinder($fn = 32, h = 30, r = 0.6400000000);
+											cylinder($fn = 32, h = 30, r = 1.0200000000);
 										}
 									}
 								}
 								translate(v = [0, 0, 10]) {
 									translate(v = [5.1800000000, 0, 0]) {
 										rotate(a = 90, v = [1, 0, 0]) {
-											cylinder($fn = 32, h = 30, r = 0.6400000000);
+											cylinder($fn = 32, h = 30, r = 1.0200000000);
 										}
 									}
 								}
 								translate(v = [0, 0, 10]) {
 									translate(v = [7.7700000000, 0, 0]) {
 										rotate(a = 90, v = [1, 0, 0]) {
-											cylinder($fn = 32, h = 30, r = 0.6400000000);
+											cylinder($fn = 32, h = 30, r = 1.0200000000);
 										}
 									}
 								}
@@ -84,14 +84,14 @@ class Inlay( Element ):
 
         cyl1 = up(10)(
                 rotate(90, [1,0,0]) (
-                    cylinder(0.64, 30, segments=32)
+                    cylinder(1.02, 30, segments=32)
                     )
                 )
 
         cyl2 = up(10)(
                 right(2.59)(
                     rotate(90, [1,0,0]) (
-                        cylinder(0.64, 30, segments=32)
+                        cylinder(1.02, 30, segments=32)
                         )
                     )
                 )
@@ -101,7 +101,7 @@ class Inlay( Element ):
         cyl3 = up(10)(
                 right(2*2.59)(
                     rotate(90, [1,0,0]) (
-                        cylinder(0.64, 30, segments=32)
+                        cylinder(1.02, 30, segments=32)
                         )
                     )
                 )
@@ -111,7 +111,7 @@ class Inlay( Element ):
         cyl4 = up(10)(
                 right(3*2.59)(
                     rotate(90, [1,0,0]) (
-                        cylinder(0.64, 30, segments=32)
+                        cylinder(1.02, 30, segments=32)
                         )
                     )
                 )
@@ -119,8 +119,8 @@ class Inlay( Element ):
         cyls = union()(cyl1, cyl2, cyl3, cyl4)
 
         cyls = down(10) (cyls)
-        cyls = back(29.4) (cyls)
-        cyls = left(15) (cyls)
+        cyls = back(28.5) (cyls)
+        cyls = left(15.6) (cyls)
 
         smallhole = cube([15, 8, 7], center=True)
         smallhole = back(50) (smallhole)
@@ -150,7 +150,7 @@ class Inlay( Element ):
     def create_bottom_hole( self ):
         height = self.get_base_height()
 
-        increase = 3.5
+        increase = 1.8
 
         return up( (((self.p.get('top-height') - self.p.get('bottom-height')) / 2) + 0.1) ) ( 
                         forward(1.8) (cube(

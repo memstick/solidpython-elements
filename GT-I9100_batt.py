@@ -14,14 +14,14 @@ class Inlay( Element ):
 
         cyl1 = up(10)(
                 rotate(90, [1,0,0]) (
-                    cylinder(0.64, 30, segments=32)
+                    cylinder(1.02, 30, segments=32)
                     )
                 )
 
         cyl2 = up(10)(
                 right(2.59)(
                     rotate(90, [1,0,0]) (
-                        cylinder(0.64, 30, segments=32)
+                        cylinder(1.02, 30, segments=32)
                         )
                     )
                 )
@@ -31,7 +31,7 @@ class Inlay( Element ):
         cyl3 = up(10)(
                 right(2*2.59)(
                     rotate(90, [1,0,0]) (
-                        cylinder(0.64, 30, segments=32)
+                        cylinder(1.02, 30, segments=32)
                         )
                     )
                 )
@@ -41,7 +41,7 @@ class Inlay( Element ):
         cyl4 = up(10)(
                 right(3*2.59)(
                     rotate(90, [1,0,0]) (
-                        cylinder(0.64, 30, segments=32)
+                        cylinder(1.02, 30, segments=32)
                         )
                     )
                 )
@@ -49,8 +49,8 @@ class Inlay( Element ):
         cyls = union()(cyl1, cyl2, cyl3, cyl4)
 
         cyls = down(10) (cyls)
-        cyls = back(29.4) (cyls)
-        cyls = left(15) (cyls)
+        cyls = back(28.5) (cyls)
+        cyls = left(15.6) (cyls)
 
         smallhole = cube([15, 8, 7], center=True)
         smallhole = back(50) (smallhole)
@@ -80,7 +80,7 @@ class Inlay( Element ):
     def create_bottom_hole( self ):
         height = self.get_base_height()
 
-        increase = 3.5
+        increase = 1.8
 
         return up( (((self.p.get('top-height') - self.p.get('bottom-height')) / 2) + 0.1) ) ( 
                         forward(1.8) (cube(
